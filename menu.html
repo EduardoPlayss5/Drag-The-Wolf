@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #3498db, #2980b9);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .home_menu {
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .home_menu:hover {
+            transform: scale(1.02);
+        }
+
+        .home_menu h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+            font-family: 'Cinzel', sans-serif;
+        }
+
+        .home_menu img {
+            width: 250px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 30px;
+        }
+
+        .playbutton {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .playbutton:hover {
+            background-color: #219a52;
+        }
+
+        .copyright {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="home_menu">
+        <h1>DRAG THE WOLF! (BETA)</h1>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuD-EBh1cOiSHjiF-2N7fMjMC0Y1IxIzFlpAwQvXg1rg&s"/>
+        <br>
+        <br>
+        <button onclick="play()" class="playbutton">Click here to Start!</button>
+        <p class="copyright">(c) EduardoGames</p>
+    </div>
+</body>
+
+<script>
+    function play() {
+        window.location.href = "dtw.html";
+    }
+</script>
+
+</html>

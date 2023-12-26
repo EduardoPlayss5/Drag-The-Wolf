@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag the Wolf</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .container .lobo {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+        }
+
+        .container .lobo:hover {
+            cursor: grab;
+        }
+    
+        .container .chegada {
+            width: 100px;
+            height: 100px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body onload="move()">
+    <div class="container">
+        <p>Objetivo: Arrastar o lobo até o quadrado azul</p>
+        <div class="lobo" id="lobo" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuD-EBh1cOiSHjiF-2N7fMjMC0Y1IxIzFlpAwQvXg1rg&s'); background-size: cover; background-position: -50px;background-repeat: no-repeat;"></div>
+        <div class="chegada" id="chegada" style="left: 1450px; top: 50px; background-color: blue;"></div>
+    </div>
+    <div class="ponts">
+        <p>Ganhou: <span id="wins">0</span> Vezes</p>
+    </div>
+</body>
+
+<script>
+    let holdingElement;
+    var chegada = document.getElementById("chegada");
+    let winscounter = 0;
+    const wins = document.getElementById("wins");
+    const soundwin = new Audio();
+    soundwin.src = "./local_resources/win.mp3";
+
+    const move = function(){
+        const elementSelected = document.querySelector('.lobo');
+
+        elementSelected.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            elementSelected.style.position = "absolute";
+            holdingElement = elementSelected;
+
+            document.onmousemove = (e) => {
+                var x = e.pageX;
+                var y = e.pageY;
+
+                holdingElement.style.left = x + "px";
+                holdingElement.style.top = y + "px";
+            }
+        });
+
+        document.addEventListener("mouseup", () => {
+            if (isOverlapping(holdingElement, chegada)) {
+                soundwin.play();
+                alert("Parabéns! Você colocou o lobo na área de chegada.");
+                holdingElement.style.position = "static";
+                holdingElement.style.left = "auto";
+                holdingElement.style.top = "auto";
+                winscounter+=1;
+                wins.innerText = winscounter;
+                holdingElement = "";
+                document.onmousemove = null;
+            } else {
+                holdingElement = "";
+                document.onmousemove = null;
+            }
+        });
+    }
+
+    const isOverlapping = (element1, element2) => {
+        const rect1 = element1.getBoundingClientRect();
+        const rect2 = element2.getBoundingClientRect();
+
+        return !(
+            rect1.right < rect2.left ||
+            rect1.left > rect2.right ||
+            rect1.bottom < rect2.top ||
+            rect1.top > rect2.bottom
+        );
+    };
+</script>
+
+</html>
